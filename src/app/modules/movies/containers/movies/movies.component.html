@@ -1,0 +1,27 @@
+<div class="p-4">
+  <app-movie-search
+    [value]="searchQuery"
+    (valueChange)="searchQuery = $event"
+    (search)="search()"
+  />
+  <div class="flex justify-center mt-6 mb-6" *ngIf="moviesUiService.totalPages() > 1">
+    <button
+      class="px-4 py-2 mx-1 rounded bg-gray-700 text-white disabled:opacity-50"
+      [disabled]="moviesUiService.currentPage() === 1"
+      (click)="goToPage(moviesUiService.currentPage() - 1)">
+      Prev
+    </button>
+    <span class="text-white px-4 py-2">{{ moviesUiService.currentPage() }} / {{ moviesUiService.totalPages() }}</span>
+    <button
+      class="px-4 py-2 mx-1 rounded bg-gray-700 text-white disabled:opacity-50"
+      [disabled]="moviesUiService.currentPage() === moviesUiService.totalPages()"
+      (click)="goToPage(moviesUiService.currentPage() + 1)">
+      Next
+    </button>
+  </div>
+  <app-movie-list
+    [movieList]="moviesUiService.popularMovies()"
+    [movieListLoader]="moviesUiService.movieListLoader()"
+    (openMovie)="openMovie($event)"
+  />
+</div>

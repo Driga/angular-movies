@@ -1,0 +1,21 @@
+<ng-container *ngIf="!movieListLoader; else loading">
+  <ng-container *ngIf="movieList?.length; else empty">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <app-movie-card
+        *ngFor="let movie of movieList"
+        [movie]="movie"
+        (open)="onOpenMovie(movie)">
+      </app-movie-card>
+    </div>
+  </ng-container>
+
+  <ng-template #empty>
+    <div class="text-white text-center mt-4 border border-white/20 rounded p-4">
+      No movies found
+    </div>
+  </ng-template>
+</ng-container>
+
+<ng-template #loading>
+  <app-movie-loader />
+</ng-template>

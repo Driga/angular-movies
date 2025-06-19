@@ -1,0 +1,21 @@
+<mat-card class="cursor-pointer hover:shadow-xl" (click)="open.emit()" *ngIf="movie">
+  <mat-card-title class="text-white text-center h-16 content-center ">
+    {{ movie.title }}
+  </mat-card-title>
+  <img
+    [src]="movie.poster_path
+      ? 'https://image.tmdb.org/t/p/w400' + movie.poster_path
+      : 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'"
+    alt="{{ movie.title }}"
+    class=""
+  />
+  <mat-card-content
+    class="text-white min-h-28"
+    [matTooltip]="movie.overview"
+    [matTooltipPosition]="'above'"
+  >
+    <p class="line-clamp-3 pt-5 text-md">
+      {{ movie.overview || 'No description' }}
+    </p>
+  </mat-card-content>
+</mat-card>
